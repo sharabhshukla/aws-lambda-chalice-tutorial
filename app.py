@@ -13,6 +13,11 @@ def health_ping():
     return json.dumps('OK')
 
 
+@app.route('/city/{city}', methods=['POST'])
+def city_fn(city):
+
+
+
 # The view function above will return {"hello": "world"}
 # whenever you make an HTTP GET request to '/'.
 #
