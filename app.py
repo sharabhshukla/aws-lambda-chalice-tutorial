@@ -5,8 +5,6 @@ from pydantic import ValidationError
 
 app = Chalice(app_name='helloworld')
 app.log.setLevel('INFO')
-global glo_test_var
-glo_test_var = 'test string for global variable'
 
 
 @app.route('/')
@@ -16,7 +14,7 @@ def index():
 
 @app.route('/health')
 def health_ping():
-    return Response(body='OK', status_code=200)
+    return Response(body={'Status': 'OK'}, status_code=200)
 
 
 @app.route('/user', methods=['POST'])
@@ -31,14 +29,6 @@ def city_fn():
         app.log.info('Failed validation of the json body')
         return Response(body=str(ve), status_code=400)
 
-
-
-
-
-
-@app.route('/global_test', methods=['GET'])
-def get_global_var():
-    return Response(body=glo_test_var, status_code=200 )
 
 
 
