@@ -1,6 +1,11 @@
 {
   "resources": [
     {
+      "name": "managed-layer",
+      "resource_type": "lambda_layer",
+      "layer_version_arn": "arn:aws:lambda:us-east-1:231692206942:layer:helloworld-dev-managed-layer:4"
+    },
+    {
       "name": "default-role",
       "resource_type": "iam_role",
       "role_arn": "arn:aws:iam::231692206942:role/helloworld-dev",
@@ -14,8 +19,8 @@
     {
       "name": "rest_api",
       "resource_type": "rest_api",
-      "rest_api_id": "d4xjpxybxd",
-      "rest_api_url": "https://d4xjpxybxd.execute-api.us-east-1.amazonaws.com/api/"
+      "rest_api_id": "0m1akzc8xd",
+      "rest_api_url": "https://0m1akzc8xd.execute-api.us-east-1.amazonaws.com/api/"
     }
   ],
   "schema_version": "2.0",

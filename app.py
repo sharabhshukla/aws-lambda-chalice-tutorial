@@ -1,20 +1,44 @@
-from chalice import Chalice
-import json
+from chalice import Chalice, Response
+from chalicelib.data_models import InputModel
+from pydantic import ValidationError
+
 
 app = Chalice(app_name='helloworld')
+app.log.setLevel('INFO')
+global glo_test_var
+glo_test_var = 'test string for global variable'
 
 
 @app.route('/')
 def index():
+    app.log.info('This is from the root of the api')
     return {'hello': 'world'}
 
 @app.route('/health')
 def health_ping():
-    return json.dumps('OK')
+    return Response(body='OK', status_code=200)
 
 
-@app.route('/city/{city}', methods=['POST'])
-def city_fn(city):
+@app.route('/user', methods=['POST'])
+def city_fn():
+    app.log.info('Entering the user function intiated fromuser endpoint')
+    json_body = app.current_request.json_body
+    try:
+        validated_json = InputModel(**json_body)
+        app.log.info('Successfully validated the json body')
+        return Response(body=validated_json.json())
+    except ValidationError as ve:
+        app.log.info('Failed validation of the json body')
+        return Response(body=str(ve), status_code=400)
+
+
+
+
+
+
+@app.route('/global_test', methods=['GET'])
+def get_global_var():
+    return Response(body=glo_test_var, status_code=200 )
 
 
 
