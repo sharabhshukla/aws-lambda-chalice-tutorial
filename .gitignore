@@ -1,2 +1,6 @@
 .chalice/deployments/
 .chalice/venv/
+__pycache__
+.idea/
+.pytest_cache/
+tests/.pytest_cache
